@@ -1,13 +1,24 @@
 "use client";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import {
-    slideInFromTop,
     slideInFromLeft,
     slideInFromRight,
+    slideInFromTop,
 } from "@/lib/motion";
-import Image from "next/image";
 import { SparklesIcon } from "@heroicons/react/24/solid";
+
+// Dynamically import Spline (disable SSR)
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
+    ssr: false,
+    loading: () => (
+        <div className="text-white text-center pt-10">Loading 3D animation...</div>
+    ),
+});
+
+
 
 const Aboutus = () => {
     return (
@@ -67,8 +78,12 @@ const Aboutus = () => {
                     {/* Right 3D Spline Animation */}
                     <motion.div
                         variants={slideInFromRight(0.5)}
-                        className="relative w-full lg:w-1/2 z-0"
+                        className="w-full lg:w-1/2 z-0"
                     >
+                        <Spline
+                            className="absolute top-0 -right-[25%] object-contain"
+                            scene="https://prod.spline.design/RPyEOlG6uRTynz5y/scene.splinecode"
+                        />
                     </motion.div>
                 </div>
             </motion.section>
