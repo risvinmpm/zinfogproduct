@@ -24,7 +24,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center justify-center">
           <div className="flex items-center gap-8 border border-[#7042f861] bg-[#0300145e] px-6 py-2 rounded-full text-gray-200 text-sm font-medium">
             <Link href="#about-me" className="cursor-pointer">
-              About Us
+              Team
             </Link>
             <Link href="#aboutus" className="cursor-pointer">
               Products
