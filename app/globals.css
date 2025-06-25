@@ -31,3 +31,12 @@
   width: max-content;
   transition: 0.45s cubic-bezier(0.6, 0.6, 0, 1) box-shadow;
 }
+
+.fade-end {
+  -webkit-mask-image: linear-gradient(to right, black 50%, transparent 100%);
+  mask-image: linear-gradient(to right, black 50%, transparent 100%);
+  -webkit-mask-size: 100%;
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
