@@ -3,6 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Aboutus from "../components/main/Aboutus";
 import Features from "@/components/main/Features";
 import Training from "../components/main/Training";
+import Team from "@/components/main/Team";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       {/* <Aboutus /> */}
       <Features />
       <Training />
+      <Team />
     </div>
   );
 }
