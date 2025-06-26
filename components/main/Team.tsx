@@ -1,6 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Hexagon component
 const Hex = ({ label }: { label: string }) => (
@@ -12,35 +16,115 @@ const Hex = ({ label }: { label: string }) => (
 );
 
 const Team = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const hexRefs = useRef<HTMLDivElement[]>([]);
+
   const columns = [
-    ["Visa", "Mastercard"], 
-    ["Stripe", "Paypal", "Google"], 
+    ["Visa", "Mastercard"],
+    ["Stripe", "Paypal", "Google"],
     ["Apple", "Amazon", "Microsoft", "Netflix"],
-    ["Tesla", "Meta"],
+    ["Tesla", "Meta"]
   ];
 
+  const allItems = columns.flat();
+
+  useEffect(() => {
+    const hexes = hexRefs.current;
+    const radius = 200;
+
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top center",
+      end: "+=300",
+      onEnter: () => {
+        // Animate to circle layout
+        hexes.forEach((el, i) => {
+          const angle = (i / hexes.length) * Math.PI * 2;
+          const x = radius * Math.cos(angle);
+          const y = radius * Math.sin(angle);
+
+          gsap.to(el, {
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            x,
+            y,
+            xPercent: -50,
+            yPercent: -50,
+            ease: "power3.inOut",
+            duration: 1,
+            delay: i * 0.02
+          });
+        });
+      },
+      onLeave: () => {
+        // Animate back to column layout
+        hexes.forEach((el, i) => {
+          gsap.to(el, {
+            clearProps: "all",
+            ease: "power3.inOut",
+            duration: 1,
+            delay: i * 0.02
+          });
+        });
+      },
+      onEnterBack: () => {
+        // Scroll back up to circle layout
+        hexes.forEach((el, i) => {
+          const angle = (i / hexes.length) * Math.PI * 2;
+          const x = radius * Math.cos(angle);
+          const y = radius * Math.sin(angle);
+
+          gsap.to(el, {
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            x,
+            y,
+            xPercent: -50,
+            yPercent: -50,
+            ease: "power3.inOut",
+            duration: 1,
+            delay: i * 0.02
+          });
+        });
+      },
+      onLeaveBack: () => {
+        // Scroll above — restore to columns
+        hexes.forEach((el, i) => {
+          gsap.to(el, {
+            clearProps: "all",
+            ease: "power3.inOut",
+            duration: 1,
+            delay: i * 0.02
+          });
+        });
+      }
+    });
+  }, []);
+
   return (
-    <div className="relative z-10 main-padding text-white py-10 lg:py-20 xl:py-30">
-      {/* Header section */}
-      <div className="flex flex-col md:flex-row items-start md:items-center">
-        {/* Left Text */}
+    <div
+      ref={containerRef}
+      className="relative z-10 main-padding text-white py-10 lg:py-20 xl:py-30"
+    >
+      {/* Header */}
+      <div className="flex flex-col md:flex-row gap-10">
         <div className="max-w-sm">
-          <p className="text-3xl md:text-4xl font-light leading-relaxed">
+          <p className="text-3xl md:text-4xl lg:text-6xl font-light leading-20 fade-text">
             Used by top teams across the globe
           </p>
         </div>
-
-        {/* Right Stats */}
         <div className="mt-6 md:mt-0">
-          <h1 className="text-7xl md:text-9xl font-bold text-right md:text-left">
+          <h1 className="text-7xl md:text-9xl font-bold text-right md:text-left fade-text">
             110k
           </h1>
-          <p className="text-right md:text-left">Customers since 2023</p>
+          <p className="text-right fade-text">Customers since 2023</p>
         </div>
       </div>
 
-      {/* Custom Hex Columns */}
-      <div className="mt-20 flex gap-6 flex-wrap">
+      {/* Layout (circle <-> column by scroll) */}
+      <div className="mt-20 flex gap-6 flex-wrap relative min-h-[600px]">
         {columns.map((column, colIndex) => (
           <div
             key={colIndex}
@@ -48,12 +132,46 @@ const Team = () => {
               colIndex % 2 !== 0 ? "mt-6" : ""
             }`}
           >
-            {column.map((item, itemIndex) => (
-              <Hex key={itemIndex} label={item} />
-            ))}
+            {column.map((label, i) => {
+              const index =
+                columns
+                  .slice(0, colIndex)
+                  .reduce((acc, val) => acc + val.length, 0) + i;
+
+              return (
+                <div
+                  key={index}
+                  ref={(el) => {
+                    if (el) hexRefs.current[index] = el;
+                  }}
+                >
+                  <Hex label={label} />
+                </div>
+              );
+            })}
           </div>
         ))}
       </div>
+      <style jsx>{`
+        .fade-text {
+          -webkit-mask-image: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0.6) 50%,
+            rgba(255, 255, 255, 0.1) 90%
+          );
+          mask-image: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0.6) 50%,
+            rgba(255, 255, 255, 0.1) 90%
+          );
+          -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+          -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+        }
+      `}</style>
     </div>
   );
 };
