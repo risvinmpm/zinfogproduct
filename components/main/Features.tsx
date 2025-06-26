@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useEffect } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
-import { HeroScrollDemo } from "./ScrollAnimation";
+import { HeroScrollDemo } from "../ui/ScrollAnimation";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Link from "next/link";
