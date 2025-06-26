@@ -8,7 +8,6 @@ import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Placeholder components — replace later with real ones
 const GitHubGlobe = () => (
   <div className="h-[400px] flex items-center justify-center text-white text-2xl border border-white/20 rounded-xl">
     GitHub Globe Placeholder
@@ -45,12 +44,19 @@ const featureList = [
 const Features = () => {
   const highlightRefs = useRef<HTMLDivElement[]>([]);
   const sectionRefs = useRef<HTMLDivElement[]>([]);
+  const textBlockRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     const activate = (index: number) => {
       highlightRefs.current.forEach((el, i) => {
-        if (el) {
-          el.style.height = i === index ? "100%" : "0px";
+        if (el) el.style.height = i === index ? "100%" : "0px";
+      });
+
+      textBlockRefs.current.forEach((el, i) => {
+        if (!el) return;
+        el.classList.remove("active-feature");
+        if (i === index) {
+          el.classList.add("active-feature");
         }
       });
     };
@@ -68,7 +74,7 @@ const Features = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-10 lg:py-20 xl:py-30 relative z-10">
-      {/* Sticky Left Panel */}
+      {/* Left Text Panel */}
       <div className="text-white px-6 md:px-10 lg:px-20 sticky top-20 self-start h-fit">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight max-w-xl mb-10">
           Craft{" "}
@@ -79,17 +85,20 @@ const Features = () => {
 
         <div className="space-y-16 max-w-xl relative border-l border-white/10 pl-8">
           {featureList.map((feature, index) => (
-            <div key={index} className="relative">
-              {/* Fading Highlight Line */}
+            <div
+              key={index}
+              ref={(el) => (textBlockRefs.current[index] = el!)}
+              className="transition-colors duration-500 relative p-4 rounded-md group"
+            >
               <div
                 ref={(el) => (highlightRefs.current[index] = el!)}
                 className="absolute -left-8 top-0 w-[1px] h-0 bg-gradient-to-b from-white/0 via-white/70 to-white/70 rounded-full transition-all duration-500"
               ></div>
 
-              <h4 className="text-lg md:text-xl font-bold pb-1">
+              <h4 className="feature-title text-lg md:text-xl font-bold pb-1 text-gray-500 transition-colors duration-500">
                 {feature.title}
               </h4>
-              <p className="text-sm md:text-base text-gray-300">
+              <p className="feature-desc text-sm md:text-base text-gray-500 transition-colors duration-500">
                 {feature.description}
               </p>
             </div>
@@ -109,7 +118,7 @@ const Features = () => {
       </div>
 
       {/* Scroll Reveal Section */}
-      <div className="space-y-40 w-full ">
+      <div className="space-y-40 w-full">
         {featureList.map((feature, index) => (
           <div
             key={index}
@@ -120,6 +129,19 @@ const Features = () => {
           </div>
         ))}
       </div>
+
+      {/* Custom styling for active state */}
+      <style jsx global>{`
+        .feature-title,
+        .feature-desc {
+          color: #6b7280; /* default gray-500 */
+        }
+
+        .active-feature .feature-title,
+        .active-feature .feature-desc {
+          color: white !important;
+        }
+      `}</style>
     </div>
   );
 };
