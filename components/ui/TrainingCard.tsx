@@ -104,11 +104,11 @@ const GlassCard = () => {
         ref={bgRef}
       >
         <Image
-          src="/training_blur.png"
+          src="/overlay.png"
           width={800}
           height={800}
           alt=""
-          className="absolute z-0 opacity-40"
+          className="absolute w-full h-full object-contain z-0 opacity-40"
         />
         <Image
           src="/training_bg.png"
