@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Testimonials from "./Testimonials";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -152,6 +153,11 @@ const Team = () => {
           </div>
         ))}
       </div>
+
+      <div className="max-w-2xl pt-20">
+        <Testimonials />
+      </div>
+      
       <style jsx>{`
         .fade-text {
           -webkit-mask-image: linear-gradient(
