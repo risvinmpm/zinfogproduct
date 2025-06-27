@@ -3,16 +3,18 @@
 import React, { useRef, useState, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
+import * as THREE from "three"; // ✅ Import THREE for types
 // @ts-ignore
 import * as random from "maath/random/dist/maath-random.esm";
 
+// Star field component
 const StarBackground = (props: any) => {
-  const ref: any = useRef();
+  const ref = useRef<THREE.Points>(null); // ✅ Type-safe ref
   const [sphere] = useState(() =>
     random.inSphere(new Float32Array(5000), { radius: 1.2 })
   );
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (ref.current) {
       ref.current.rotation.x -= delta / 10;
       ref.current.rotation.y -= delta / 15;
@@ -30,16 +32,17 @@ const StarBackground = (props: any) => {
       >
         <PointMaterial
           transparent
-          color="#ffffff"  
+          color="#ffffff"
           size={0.002}
-          sizeAttenuation={true}
-          depthWrite={false} 
+          sizeAttenuation
+          depthWrite={false}
         />
       </Points>
     </group>
   );
 };
 
+// Canvas wrapper component
 const StarsCanvas = () => (
   <div className="fixed inset-0 w-full h-screen z-10 pointer-events-none">
     <Canvas camera={{ position: [0, 0, 1] }}>

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
 import { gsap } from "gsap";
@@ -105,7 +104,9 @@ const ProductsCard = () => {
         {cardData.map((card, index) => (
           <div
             key={index}
-            ref={(el) => (cardsRef.current[index] = el)}
+            ref={(el) => {
+              cardsRef.current[index] = el;
+            }}
             className={`rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 text-white shadow-lg shadow-white/5 hover:shadow-white/10 transition-all duration-300 ${card.colSpan}`}
           >
             {/* Top Image */}
