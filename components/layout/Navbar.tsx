@@ -1,11 +1,37 @@
 "use client";
 
-import { Socials } from "../../constants";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { FaFacebook, FaInstagram, FaXTwitter } from "react-icons/fa6";
+
+const Socials = [
+  {
+    name: "Facebook",
+    icon: <FaFacebook />,
+    href: "https://facebook.com/yourpage",
+  },
+  {
+    name: "Threads",
+    icon: <FaXTwitter />,
+    href: "https://threads.net/yourprofile",
+  },
+  {
+    name: "Instagram",
+    icon: <FaInstagram />,
+    href: "https://instagram.com/yourhandle",
+  },
+];
 
 const Navbar = () => {
+  const handleScrollTo = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <nav className="fixed top-0 z-50 w-full h-[65px] bg-[#03001417] backdrop-blur-md shadow-lg shadow-[#2A0E61]/50 px-4 sm:px-8 md:px-10">
       <div className="w-full h-full flex items-center justify-between max-w-screen-xl mx-auto">
@@ -23,32 +49,30 @@ const Navbar = () => {
         {/* Nav Links */}
         <div className="hidden md:flex items-center justify-center">
           <div className="flex items-center gap-8 border border-[#7042f861] bg-[#0300145e] px-6 py-2 rounded-full text-gray-200 text-sm font-medium">
-            <Link href="#about-me" className="cursor-pointer">
+            <a href="#products" onClick={handleScrollTo("products")} className="cursor-pointer">
               Products
-            </Link>
-            <Link href="#aboutus" className="cursor-pointer">
+            </a>
+            <a href="#teams" onClick={handleScrollTo("teams")} className="cursor-pointer">
               Teams
-            </Link>
+            </a>
           </div>
         </div>
 
-        {/* Social Icons */}
-        <div className="flex flex-row gap-4">
+        {/* Social Media Icons */}
+        <div className="flex items-center gap-4">
           {Socials.map((social) => (
-            <Image
-              src={social.src}
-              alt={social.name}
+            <Link
               key={social.name}
-              width={24}
-              height={24}
-              className="cursor-pointer"
-            />
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-[50px] h-[50px] flex items-center justify-center rounded-full text-white hover:scale-110 transition-transform duration-300 text-2xl bg-[#0300145e]"
+            >
+              {social.icon}
+            </Link>
           ))}
         </div>
       </div>
-
-      {/* Mobile Menu Placeholder (Optional) */}
-      {/* You can add a hamburger menu toggle here if needed */}
     </nav>
   );
 };
