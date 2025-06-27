@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
 import { gsap } from "gsap";

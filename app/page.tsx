@@ -14,7 +14,6 @@ export default function Home() {
         <div className="main-padding">
           <Hero />
         </div>
-        {/* <Aboutus /> */}
         <Features />
         <Training />
         <Team />
