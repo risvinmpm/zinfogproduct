@@ -9,11 +9,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Hexagon component
 const Hex = ({ label }: { label: string }) => (
- <div className="relative w-[150px] h-[150px] my-3 z-10">
-  <div className="absolute inset-0 clip-hex bg-white/5 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-center text-white text-sm font-light">
-    {label}
+  <div className="relative w-[150px] h-[150px] my-3 z-10">
+    <div className="absolute inset-0 clip-hex bg-white/5 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-center text-white text-sm font-light">
+      {label}
+    </div>
   </div>
-</div>
 );
 
 const Team = () => {
@@ -24,10 +24,8 @@ const Team = () => {
     ["Visa", "Mastercard"],
     ["Stripe", "Paypal", "Google"],
     ["Apple", "Amazon", "Microsoft", "Netflix"],
-    ["Tesla", "Meta"]
+    ["Tesla", "Meta"],
   ];
-
-  const allItems = columns.flat();
 
   useEffect(() => {
     const hexes = hexRefs.current;
@@ -38,7 +36,6 @@ const Team = () => {
       start: "top center",
       end: "+=300",
       onEnter: () => {
-        // Animate to circle layout
         hexes.forEach((el, i) => {
           const angle = (i / hexes.length) * Math.PI * 2;
           const x = radius * Math.cos(angle);
@@ -54,23 +51,21 @@ const Team = () => {
             yPercent: -50,
             ease: "power3.inOut",
             duration: 1,
-            delay: i * 0.02
+            delay: i * 0.02,
           });
         });
       },
       onLeave: () => {
-        // Animate back to column layout
         hexes.forEach((el, i) => {
           gsap.to(el, {
             clearProps: "all",
             ease: "power3.inOut",
             duration: 1,
-            delay: i * 0.02
+            delay: i * 0.02,
           });
         });
       },
       onEnterBack: () => {
-        // Scroll back up to circle layout
         hexes.forEach((el, i) => {
           const angle = (i / hexes.length) * Math.PI * 2;
           const x = radius * Math.cos(angle);
@@ -86,26 +81,26 @@ const Team = () => {
             yPercent: -50,
             ease: "power3.inOut",
             duration: 1,
-            delay: i * 0.02
+            delay: i * 0.02,
           });
         });
       },
       onLeaveBack: () => {
-        // Scroll above — restore to columns
         hexes.forEach((el, i) => {
           gsap.to(el, {
             clearProps: "all",
             ease: "power3.inOut",
             duration: 1,
-            delay: i * 0.02
+            delay: i * 0.02,
           });
         });
-      }
+      },
     });
   }, []);
 
   return (
     <div
+      id="teams"
       ref={containerRef}
       className="relative z-10 main-padding text-white py-10 lg:py-20 xl:py-30"
     >
@@ -157,7 +152,7 @@ const Team = () => {
       <div className="max-w-2xl pt-20">
         <Testimonials />
       </div>
-      
+
       <style jsx>{`
         .fade-text {
           -webkit-mask-image: linear-gradient(

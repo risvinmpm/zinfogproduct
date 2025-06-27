@@ -5,18 +5,14 @@ import { HeroScrollDemo } from "../ui/ScrollAnimation";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Link from "next/link";
+import ProductsCard from "../ui/ProductsCard";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const GitHubGlobe = () => (
-  <div className="h-[400px] flex items-center justify-center text-white text-2xl border border-white/20 rounded-xl">
-    GitHub Globe Placeholder
-  </div>
-);
-
-const WorldMap = () => (
-  <div className="h-[400px] flex items-center justify-center text-white text-2xl border border-white/20 rounded-xl">
-    World Map Placeholder
+const Template = () => (
+  <div className="w-full h-full">
+    <Image src="/Card_3.png" className="w-full" width={100} height={100} alt="" />
   </div>
 );
 
@@ -31,13 +27,13 @@ const featureList = [
     title: "Glass, Outline, Flat styles",
     description:
       "Choose from these diverse design styles to cater to different aesthetic preferences and project requirements.",
-    component: <GitHubGlobe />
+    component: <ProductsCard />
   },
   {
     title: "Templates and Sections",
     description:
       "Streamline your design process with ready-to-use templates and sections, adaptable to various web projects.",
-    component: <WorldMap />
+    component: <Template />
   }
 ];
 
@@ -73,7 +69,7 @@ const Features = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-10 lg:py-20 xl:py-30 relative z-10">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-10 lg:py-20 xl:py-30 relative z-10 scroll-smooth" id="products">
       {/* Left Text Panel */}
       <div className="text-white px-6 md:px-10 lg:px-20 sticky top-20 self-start h-fit">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight max-w-xl mb-10">

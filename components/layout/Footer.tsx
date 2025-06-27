@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { FaFacebook, FaInstagram, FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const products = ["Tutorials", "Pricing"];
@@ -11,19 +12,31 @@ const Footer = () => {
     {
       label: "Sales:",
       href: "mailto:sales@zinfog.com",
-      display: "sales@zinfog.com",
+      display: "sales@zinfog.com"
     },
     {
       label: "Mob:",
       href: "tel:+919778965493",
-      display: "+91 9778965493",
-    },
+      display: "+91 9778965493"
+    }
   ];
 
   const socialMedia = [
-    { src: "/facebook.png", alt: "Facebook" },
-    { src: "/treads.png", alt: "Threads" },
-    { src: "/instagram.png", alt: "Instagram" },
+    {
+      name: "Facebook",
+      icon: <FaFacebook />,
+      href: "https://facebook.com/yourpage"
+    },
+    {
+      name: "Threads",
+      icon: <FaXTwitter />,
+      href: "https://threads.net/yourprofile"
+    },
+    {
+      name: "Instagram",
+      icon: <FaInstagram />,
+      href: "https://instagram.com/yourhandle"
+    }
   ];
 
   return (
@@ -91,9 +104,17 @@ const Footer = () => {
             <br /> Kerala - 673014
           </p>
           <div className="flex gap-4">
-            {socialMedia.map(({ src, alt }) => (
-              <Image key={alt} src={src} width={50} height={50} alt={alt} />
-            ))}
+            {socialMedia.map((social) => (
+            <Link
+              key={social.name}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-[50px] h-[50px] flex items-center justify-center rounded-full text-white hover:scale-110 transition-transform duration-300 text-2xl bg-[#0300145e]"
+            >
+              {social.icon}
+            </Link>
+          ))}
           </div>
         </div>
       </div>
