@@ -111,7 +111,7 @@ const Features = () => {
               type="button"
               className="text-base font-light mt-10 px-10 py-2 border rounded-md flex justify-center items-center gap-5 cursor-pointer hover:bg-white/10 transition"
             >
-              Connect Us <MdArrowForwardIos />
+              START FREE TRIAL <MdArrowForwardIos />
             </button>
           </Link>
         </div>

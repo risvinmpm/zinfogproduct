@@ -4,18 +4,22 @@ import Aboutus from "../components/main/Aboutus";
 import Features from "@/components/main/Features";
 import Training from "../components/main/Training";
 import Team from "@/components/main/Team";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
     <div>
       <Navbar />
-      <main className="main-padding">
-        <Hero />
+      <main>
+        <div className="main-padding">
+          <Hero />
+        </div>
+        {/* <Aboutus /> */}
+        <Features />
+        <Training />
+        <Team />
       </main>
-      {/* <Aboutus /> */}
-      <Features />
-      <Training />
-      <Team />
+      <Footer />
     </div>
   );
 }

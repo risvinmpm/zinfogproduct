@@ -27,7 +27,7 @@ const Navbar = () => {
               Products
             </Link>
             <Link href="#aboutus" className="cursor-pointer">
-              Team
+              Teams
             </Link>
           </div>
         </div>
