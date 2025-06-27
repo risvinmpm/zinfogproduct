@@ -3,16 +3,17 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Testimonials from "./Testimonials";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // Hexagon component
 const Hex = ({ label }: { label: string }) => (
-  <div className="relative w-[150px] h-[150px] my-3 z-10">
-    <div className="absolute inset-0 clip-hex bg-white/10 backdrop-blur-md border border-white/20 shadow-md flex items-center justify-center text-white font-light text-sm">
-      {label}
-    </div>
+ <div className="relative w-[150px] h-[150px] my-3 z-10">
+  <div className="absolute inset-0 clip-hex bg-white/5 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-center text-white text-sm font-light">
+    {label}
   </div>
+</div>
 );
 
 const Team = () => {
@@ -152,6 +153,11 @@ const Team = () => {
           </div>
         ))}
       </div>
+
+      <div className="max-w-2xl pt-20">
+        <Testimonials />
+      </div>
+      
       <style jsx>{`
         .fade-text {
           -webkit-mask-image: linear-gradient(
