@@ -55,10 +55,9 @@ const cardData = [
 
 const GlassCard = () => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const bgRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Smooth reveal animation for all cards
     gsap.fromTo(
       cardsRef.current,
       {
@@ -84,7 +83,6 @@ const GlassCard = () => {
       }
     );
 
-    // Background subtle zoom animation
     if (bgRef.current) {
       gsap.to(bgRef.current, {
         scale: 1.03,
@@ -124,7 +122,9 @@ const GlassCard = () => {
         {cardData.map((card, index) => (
           <div
             key={index}
-            ref={(el) => (cardsRef.current[index] = el)}
+            ref={(el) => {
+              cardsRef.current[index] = el;
+            }}
             className={`rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 text-white shadow-lg shadow-white/5 hover:shadow-white/10 transition-all duration-300 ${card.colSpan}`}
           >
             {/* Top Image */}
