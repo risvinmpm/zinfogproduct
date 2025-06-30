@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { FaFacebook, FaInstagram, FaXTwitter } from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const products = ["Tutorials", "Pricing"];
@@ -29,7 +29,7 @@ const Footer = () => {
     },
     {
       name: "Threads",
-      icon: <FaXTwitter />,
+      icon: <FaTwitter />,
       href: "https://threads.net/yourprofile"
     },
     {
