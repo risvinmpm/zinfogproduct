@@ -95,7 +95,7 @@ const GlassCard = () => {
   }, []);
 
   return (
-    <section className="relative main-padding mt-30">
+    <section className="relative main-padding mt-14 md:mt-20 lg:mt-30">
       {/* Animated Background */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none"

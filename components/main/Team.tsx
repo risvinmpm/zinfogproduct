@@ -107,7 +107,7 @@ const Team = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row gap-10">
         <div className="max-w-sm">
-          <p className="text-3xl md:text-4xl lg:text-6xl font-light leading-20 fade-text">
+          <p className="text-3xl md:text-4xl lg:text-6xl font-light md:leading-10 lg:leading-20 fade-text">
             Used by top teams across the globe
           </p>
         </div>

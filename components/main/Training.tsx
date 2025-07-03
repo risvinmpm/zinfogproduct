@@ -22,7 +22,7 @@ const Training = () => {
       </div>
 
       {/* Fading Text Block */}
-      <div className="-mt-20 flex justify-center px-4">
+      <div className="lg:-mt-20 flex justify-center px-4">
         <p className="text-2xl md:text-4xl lg:text-5xl leading-snug max-w-4xl text-center fade-text">
           Quick and beautiful web design: Streamlining your creative process
         </p>
