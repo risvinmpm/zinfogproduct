@@ -13,7 +13,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Template = () => (
   <div className="w-full h-full z-10">
-    <Image src="/Card_3.png" className="w-full" width={100} height={100} alt="" />
+    <Image
+      src="/Card_3.png"
+      className="w-full"
+      width={100}
+      height={100}
+      alt=""
+    />
   </div>
 );
 
@@ -22,20 +28,20 @@ const featureList = [
     title: "Components",
     description:
       "A collection of versatile components that can be tailored to fit the specific needs of your project, ensuring both aesthetic appeal and functionality.",
-    component: <HeroScrollDemo />,
+    component: <HeroScrollDemo />
   },
   {
     title: "Glass, Outline, Flat styles",
     description:
       "Choose from these diverse design styles to cater to different aesthetic preferences and project requirements.",
-    component: <ProductsCard />,
+    component: <ProductsCard />
   },
   {
     title: "Templates and Sections",
     description:
       "Streamline your design process with ready-to-use templates and sections, adaptable to various web projects.",
-    component: <Template />,
-  },
+    component: <Template />
+  }
 ];
 
 const Features = () => {
@@ -65,7 +71,7 @@ const Features = () => {
         start: "top center",
         end: "bottom center",
         onEnter: () => activate(index),
-        onEnterBack: () => activate(index),
+        onEnterBack: () => activate(index)
       });
     });
   }, []);
@@ -87,7 +93,7 @@ const Features = () => {
           </h1>
 
           <div className="space-y-16 max-w-xl relative border-l border-white/10 pl-8">
-            {featureList.map((feature, index) => (
+            {/* {featureList.map((feature, index) => (
               <div
                 key={index}
                 ref={(el) => (textBlockRefs.current[index] = el!)}
@@ -95,6 +101,28 @@ const Features = () => {
               >
                 <div
                   ref={(el) => (highlightRefs.current[index] = el!)}
+                  className="absolute -left-8 top-0 w-[1px] h-0 bg-gradient-to-b from-white/0 via-white/70 to-white/70 rounded-full transition-all duration-500"
+                />
+                <h4 className="feature-title text-lg md:text-xl font-bold pb-1 text-gray-500 transition-colors duration-500">
+                  {feature.title}
+                </h4>
+                <p className="feature-desc text-sm md:text-base text-gray-500 transition-colors duration-500">
+                  {feature.description}
+                </p>
+              </div>
+            ))} */}
+            {featureList.map((feature, index) => (
+              <div
+                key={index}
+                ref={(el) => {
+                  if (el) textBlockRefs.current[index] = el;
+                }}
+                className="transition-colors duration-500 relative p-4 rounded-md group"
+              >
+                <div
+                  ref={(el) => {
+                    if (el) highlightRefs.current[index] = el;
+                  }}
                   className="absolute -left-8 top-0 w-[1px] h-0 bg-gradient-to-b from-white/0 via-white/70 to-white/70 rounded-full transition-all duration-500"
                 />
                 <h4 className="feature-title text-lg md:text-xl font-bold pb-1 text-gray-500 transition-colors duration-500">
@@ -155,7 +183,9 @@ const Features = () => {
 
         {/* Tab Content */}
         <div className="bg-white/5 p-4 rounded-md space-y-4">
-          <p className="text-base text-white/80">{featureList[activeTab].description}</p>
+          <p className="text-base text-white/80">
+            {featureList[activeTab].description}
+          </p>
           <div>{featureList[activeTab].component}</div>
         </div>
       </div>
